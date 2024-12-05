@@ -1,15 +1,26 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Transaction {
-
+public class Transaction
+{
+  //singleton
 private static Transaction instance;
     private Transaction() {}
     private static Transaction getInstance()
     {if (instance == null)
         {instance = new Transaction();}
      return instance;}
+//save transaction
+    public void saveTransaction(String traansactionDetails) 
+  {
+        try (FileWriter writer = new FileWriter("transactions.txt" , true))
+        {writer.write(transactionDetails + System.lineSeperator());}
+     catch (IOExeption e)
+        {System.out.printIn("Error + e.getMessage())}
+  }
+}
 
+    
     
     // Perform the borrowing of a book
     public static boolean borrowBook(Book book, Member member) {
