@@ -28,7 +28,8 @@ private static Transaction instance;
             book.borrowBook();
             member.borrowBook(book); 
             String transactionDetails = getCurrentDateTime() + " - Borrowing: " + member.getName() + " borrowed " + book.getTitle();
-            System.out.println(transactionDetails);
+          Transaction.getTransaction().saveTransaction(transactionDetails);
+              System.out.println(transactionDetails);
             return true;
         } else {
             System.out.println("The book is not available.");
@@ -42,7 +43,8 @@ private static Transaction instance;
             member.returnBook(book);
             book.returnBook();
             String transactionDetails = getCurrentDateTime() + " - Returning: " + member.getName() + " returned " + book.getTitle();
-            System.out.println(transactionDetails);
+           Transaction.getTransaction().saveTransaction(transactionDetails);
+             System.out.println(transactionDetails);
         } else {
             System.out.println("This book was not borrowed by the member.");
         }
