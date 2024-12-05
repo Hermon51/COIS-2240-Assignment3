@@ -3,6 +3,14 @@ import java.util.Date;
 
 public class Transaction {
 
+private static Transaction instance;
+    private Transaction() {}
+    private static Transaction getInstance()
+    {if (instance == null)
+        {instance = new Transaction();}
+     return instance;}
+
+    
     // Perform the borrowing of a book
     public static boolean borrowBook(Book book, Member member) {
         if (book.isAvailable()) {
