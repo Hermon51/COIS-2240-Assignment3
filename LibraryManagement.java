@@ -32,49 +32,40 @@ public class LibraryManagement {
                 case 1:
                     System.out.print("Enter member ID: ");
                     int id = scanner.nextInt();
-                	System.out.print("Enter member name: ");
-                    String name = scanner.next();
-                    
                     scanner.nextLine();
-
+                	System.out.print("Enter member name: ");
+                    String name = scanner.nextLine();
+                    scanner.nextLine();
                     Member newMember = new Member(id, name);
                     library.addMember(newMember);
                     System.out.println("Member added successfully.");
                     break;
                 case 2:
                     System.out.print("Enter book ID: ");
-                    id = scanner.nextInt();
+                    int Id = scanner.nextInt();
                 	System.out.print("Enter book title: ");
-                    String title = scanner.next();
-                    
-                    scanner.nextLine();
-
-                    Book newBook = new Book(id, title);
+                    String title = scanner.nextLine();
+                    Book newBook = new Book(Id, title);
                     library.addBook(newBook);
                     System.out.println("Book added to library successfully.");
                     break;
                 case 3:
                 	System.out.println("\n--- Available Members ---");
                     for (Member member : library.getMembers()) {
-                        System.out.println(member.getId() + ". " + member.getName());
-                    }
-                    
-                    System.out.print("Enter member ID: ");
-                    int memberId = scanner.nextInt();
-                    
+                        System.out.println(member.getId() + ". " + member.getName()); }
+                 System.out.print("Enter member ID: ");
+                 int memberId = scanner.nextInt();
+                 scanner.nextLine();
                     System.out.println("\n--- Available Books ---");
                     for (Book book : library.getBooks()) {
                         if (book.isAvailable())
-                            System.out.println(book.getId() + ". " + book.getTitle());
-                    }
-                    
-                    System.out.print("Enter book ID: ");
+                            System.out.println(book.getId() + ". " + book.getTitle()); }
+            } System.out.print("Enter book ID: ");
                     int bookId = scanner.nextInt();
-                    
                     scanner.nextLine();
 
                     Member member = library.findMemberById(memberId);
-                    Book book = library.findBookById(bookId);
+                    Book book = library.findBookById(Id);
 
                     if (member != null && book != null) {
                     	Transaction.borrowBook(book, member);
@@ -87,12 +78,12 @@ public class LibraryManagement {
                     memberId = scanner.nextInt();
                     
                     System.out.print("Enter book ID: ");
-                    bookId = scanner.nextInt();
+                    Id = scanner.nextInt();
                     
                     scanner.nextLine();
 
-                    member = library.findMemberById(memberId);
-                    book = library.findBookById(bookId);
+                    member = library.findMemberById(id);
+                    book = library.findBookById(Id);
 
                     if (member != null && book != null) {
                     	Transaction.returnBook(book, member);
@@ -105,7 +96,7 @@ public class LibraryManagement {
                     memberId = scanner.nextInt();
                     scanner.nextLine();
 
-                    Member specificMember = library.findMemberById(memberId);
+                    Member specificMember = library.findMemberById(id);
                     
                     if (specificMember != null) {
                         System.out.println("Books borrowed by " + specificMember.getName() + ":");
@@ -126,6 +117,22 @@ public class LibraryManagement {
                 default:
                     System.out.println("Invalid choice! Please try again.");
             }
-        }
-    }
+        }  scanner.close();
+} 
+
+public boolean addBook (Book book)
+{ if (library.findBookById(book.getId()) != null)
+{ System.out.printIn("Error: book" + book.getId() + "already exists.");
+ return false;}
+library.getBooks().add(book);
+return true; } 
+
+    public boolean addMember (Member member)
+    { if (library.findMemberById(member.getId()) != null)
+{ System.out.printIn("Error: member" + member.getid() + "already exists.");
+ return false;
 }
+library.getMembers().add(member);
+return true;
+}
+
