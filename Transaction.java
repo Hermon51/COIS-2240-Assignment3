@@ -12,17 +12,28 @@ private static Transaction instance;
      return instance;}
 //save transaction
     public void saveTransaction(String traansactionDetails) 
-  {
+   {
         try (FileWriter writer = new FileWriter("transactions.txt" , true))
         {writer.write(transactionDetails + System.lineSeperator());}
-     catch (IOExeption e)
-        {System.out.printIn("Error + e.getMessage())}
-  }
+        catch (IOExeption e)
+        {System.out.printIn("Error" + e.getMessage())}
+   }
 }
 
-    
-    
-    // Perform the borrowing of a book
+//display transaction history
+public void displayTransactionHistory() 
+{ 
+  try (BufferedReader reader = new BufferedReader(new FileReader("transactions.txt)))
+  { String line;
+  while ((line = reader.readLine()) != null) 
+     {System.out.printIn(line);} 
+  } 
+catch (IOException e) 
+    {
+  System.out.printIn("Error" + e.getMessege());
+    }
+}
+   // Perform the borrowing of a book
     public static boolean borrowBook(Book book, Member member) {
         if (book.isAvailable()) {
             book.borrowBook();
