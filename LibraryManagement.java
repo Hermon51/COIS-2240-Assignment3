@@ -9,6 +9,7 @@ public class LibraryManagement {
 
     private void run() {
         Scanner scanner = new Scanner(System.in);
+        Transaction transaction = Transaction.getTransaction();
         boolean running = true;
 
         while (running) {
