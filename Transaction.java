@@ -1,36 +1,42 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;  
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Transaction
 {
-  //singleton
-private static Transaction instance;
-    private Transaction() {}
-    private static Transaction getInstance()
+  private static Transaction instance;
+                                //singleton
+ private Transaction() {}
+    public static Transaction getInstance()
     {if (instance == null)
         {instance = new Transaction();}
      return instance;}
 //save transaction
-    public void saveTransaction(String traansactionDetails) 
+   
+  public static void saveTransaction(String transactionDetails) 
    {
         try (FileWriter writer = new FileWriter("transactions.txt" , true))
-        {writer.write(transactionDetails + System.lineSeperator());}
-        catch (IOExeption e)
-        {System.out.printIn("Error" + e.getMessage())}
+        {writer.write(transactionDetails + "   ");}
+        catch (IOException e)
+        {System.out.println("Error saving" + e.getMessage());}
    }
-}
+
 
 //display transaction history
 public void displayTransactionHistory() 
 { 
-  try (BufferedReader reader = new BufferedReader(new FileReader("transactions.txt)))
+  System.out.println(" ");
+  try (BufferedReader reader = new BufferedReader(new FileReader("transactions.txt")))
   { String line;
   while ((line = reader.readLine()) != null) 
-     {System.out.printIn(line);} 
+     {System.out.println(line);} 
   } 
 catch (IOException e) 
     {
-  System.out.printIn("Error" + e.getMessege());
+  System.out.println("Error reading history" + e.getMessage());
     }
 }
    // Perform the borrowing of a book
@@ -39,7 +45,7 @@ catch (IOException e)
             book.borrowBook();
             member.borrowBook(book); 
             String transactionDetails = getCurrentDateTime() + " - Borrowing: " + member.getName() + " borrowed " + book.getTitle();
-          Transaction.getTransaction().saveTransaction(transactionDetails);
+          saveTransaction(transactionDetails);
               System.out.println(transactionDetails);
             return true;
         } else {
@@ -54,7 +60,7 @@ catch (IOException e)
             member.returnBook(book);
             book.returnBook();
             String transactionDetails = getCurrentDateTime() + " - Returning: " + member.getName() + " returned " + book.getTitle();
-           Transaction.getTransaction().saveTransaction(transactionDetails);
+           saveTransaction(transactionDetails);
              System.out.println(transactionDetails);
         } else {
             System.out.println("This book was not borrowed by the member.");
