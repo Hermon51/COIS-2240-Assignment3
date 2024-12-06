@@ -43,11 +43,15 @@ public class ads {
                 case 2:
                     System.out.print("Enter book ID: ");
                     int bookId = scanner.nextInt();
+                    scanner.nextLine();
                 	System.out.print("Enter book title: ");
                     String title = scanner.nextLine();
-                    Book newBook = new Book(bookId, title);
+                   try {  Book newBook = new Book(bookId, title);
                     library.addBook(newBook);
                     System.out.println("Book added to library successfully.");
+                       }
+                    catch (Exception e)
+                       {System.out.println("Error" + e.getMessage());}
                     break;
                 case 3:
                 	System.out.println("\n--- Available Members ---");
