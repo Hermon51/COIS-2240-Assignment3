@@ -26,7 +26,7 @@ public class Transaction
 
 
 //display transaction history
-public void displayTransactionHistory() 
+public static void displayTransactionHistory() 
 { 
   System.out.println(" ");
   try (BufferedReader reader = new BufferedReader(new FileReader("transactions.txt")))
